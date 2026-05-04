@@ -11,7 +11,7 @@ export default function FacebookPixel() {
     if (!PIXEL_ID) return;
 
     const init = () => {
-      if (typeof window.fbq === 'function') return; // already loaded
+      if (typeof (window as any).fbq === 'function') return;
       /* eslint-disable */
       (function(f: any, b: any, e: any, v: any) {
         if (f.fbq) return;
@@ -22,11 +22,10 @@ export default function FacebookPixel() {
         const s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
       })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
       /* eslint-enable */
-      window.fbq('init', PIXEL_ID);
-      window.fbq('track', 'PageView');
+      (window as any).fbq('init', PIXEL_ID);
+      (window as any).fbq('track', 'PageView');
     };
 
-    // Lazy: fire on first interaction or after 3s
     const events = ['mousedown', 'touchstart', 'scroll'];
     const handler = () => { init(); events.forEach(ev => window.removeEventListener(ev, handler)); };
     const timer = setTimeout(init, 3000);
@@ -35,8 +34,8 @@ export default function FacebookPixel() {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-      window.fbq('track', 'PageView');
+    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
+      (window as any).fbq('track', 'PageView');
     }
   }, [pathname]);
 
