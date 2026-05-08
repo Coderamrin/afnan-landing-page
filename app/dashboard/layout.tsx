@@ -1,7 +1,8 @@
+import LogoutButton from "@/components/LogoutButton";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import LogoutButton from "@/components/LogoutButton";
+
 
 export default async function DashboardLayout({
   children,
