@@ -53,7 +53,7 @@ const DISTRICTS = [
   "সিলেট",
   "রংপুর",
   "ময়মনসিংহ",
-  "কুমিল্লা",
+  "কুমিলা",
   "নারায়ণগঞ্জ",
   "গাজীপুর",
   "টাঙ্গাইল",
@@ -125,12 +125,45 @@ export default function OrderSection() {
 
     trackFb("InitiateCheckout", { value: total, currency: "BDT" });
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1600));
-    trackFb("Purchase", {
-      value: total,
-      currency: "BDT",
-      order_id: `AFN-${Date.now()}`,
-    });
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerName: form.name,
+          customerPhone: form.phone,
+          district: form.district,
+          address: form.address,
+          paymentMethod: form.payment,
+          subtotal: subtotal,
+          deliveryCharge: deliveryCharge,
+          total: total,
+          productKey: product.key,
+          productName: product.name,
+          productNameEn: product.nameEn,
+          size: selectedSize,
+          quantity: quantity,
+          price: product.price,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Order submission failed");
+
+      const data = await response.json();
+
+      trackFb("Purchase", {
+        value: total,
+        currency: "BDT",
+        order_id: `AFN-${data.orderId}`,
+      });
+    } catch (error) {
+      console.error("Order failed:", error);
+      alert("অর্ডারটি সাবমিট করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+      setLoading(false);
+      return;
+    }
+
     setLoading(false);
     setSubmitted(true);
   };
