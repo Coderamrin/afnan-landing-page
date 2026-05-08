@@ -7,15 +7,8 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const productImages = [
-  { src: "/images/product-1.jpg", alt: "প্রিমিয়াম বোরকা ১" },
-  { src: "/images/product-2.jpg", alt: "প্রিমিয়াম বোরকা ২" },
-  { src: "/images/product-3.jpg", alt: "প্রিমিয়াম বোরকা ৩" },
-  { src: "/images/product-4.jpg", alt: "প্রিমিয়াম বোরকা ৪" },
-  { src: "/images/product-5.jpg", alt: "প্রিমিয়াম বোরকা ৫" },
-];
 
-export default function FeaturedProductSlider() {
+export default function FeaturedProductSlider({ productImages }: { productImages: { src: string, alt: string }[] }) {
   return (
     <section className="py-16 bg-[#f9fbf9] overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">

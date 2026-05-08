@@ -1,14 +1,6 @@
 "use client";
 import ImageCarousel from "@/components/ui/ImageCarousel";
 
-const productImages = [
-  { src: "/images/product-1.jpg", alt: "বোরকা ফ্রন্ট ভিউ" },
-  { src: "/images/product-2.jpg", alt: "বোরকা সাইড ভিউ" },
-  { src: "/images/product-3.jpg", alt: "হিজাব ক্লোজআপ" },
-  { src: "/images/product-4.jpg", alt: "নিকাব ডিটেইল" },
-  { src: "/images/product-5.jpg", alt: "ফুল সেট" },
-];
-
 const whyItems = [
   { icon: "✅", text: "উন্নত মানের কাপড়, ১০০% পর্দা নিশ্চিত" },
   { icon: "✅", text: "খুলে পড়ে না এমন মজবুত বোরকা" },
@@ -19,7 +11,7 @@ const whyItems = [
   { icon: "✅", text: "ক্যাশ অন ডেলিভারি সুবিধা" },
 ];
 
-export default function ProductImagesSection() {
+export default function ProductImagesSection({ productImages }: { productImages: { src: string, alt: string }[] }) {
   return (
     <section className="py-12 px-4 bg-white">
       <div className="max-w-5xl mx-auto">

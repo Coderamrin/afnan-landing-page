@@ -1,32 +1,38 @@
-import dynamic from "next/dynamic";
 import Header from "@/components/sections/Header";
-import HeroSection from "@/components/sections/HeroSection";
+import HomeHero from "@/components/sections/HomeHero";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import ProductGrid from "@/components/sections/ProductGrid";
+import ReviewsSection from "@/components/sections/ReviewsSection";
 import {
   WhatsAppSection,
   Footer,
   WhatsAppFloatButton,
 } from "@/components/sections/FooterSection";
 
-const ProductImagesSection = dynamic(
-  () => import("@/components/sections/ProductImagesSection"),
-);
-const ReviewsSection = dynamic(
-  () => import("@/components/sections/ReviewsSection"),
-);
-const OrderSection = dynamic(
-  () => import("@/components/sections/OrderSection"),
-);
-
 export default function Page() {
   return (
-    <main>
+    <main className="bg-white min-h-screen">
       <Header />
-      <HeroSection />
-      <ProductImagesSection />
-      <ReviewsSection />
+
+      {/* Hero Section */}
+      <HomeHero />
+
+      {/* Trust Features Section */}
+      <FeaturesSection />
+
+      {/* Product Showcase (The 3 Cards) */}
+      <ProductGrid />
+
+      {/* WhatsApp Support Section */}
       <WhatsAppSection />
-      <OrderSection />
+
+      {/* Reviews Section */}
+      <ReviewsSection />
+
+      {/* Footer */}
       <Footer />
+
+      {/* Floating WhatsApp Button */}
       <WhatsAppFloatButton />
     </main>
   );
